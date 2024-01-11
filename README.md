@@ -1,3 +1,3 @@
 # Enuygun Case
 
-[search_screen_result](/screenshots/search_screen.png)
+<img src="/screenshots/search_screen.png" height="500"/>
