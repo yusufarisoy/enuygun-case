@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="flight"
+            type="com.yusufarisoy.enuyguncase.domain.model.FlightUiModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardCornerRadius="@dimen/space_16"
+        android:elevation="4dp"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/space_16"
+        android:id="@+id/cardLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingVertical="@dimen/space_16"
+            android:paddingHorizontal="@dimen/space_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageCompanyLogo"
+                app:url="@{flight.airline.image}"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textCompanyName"
+                android:text="@{flight.airline.name}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4"
+                app:layout_constraintTop_toTopOf="@id/imageCompanyLogo"
+                app:layout_constraintStart_toEndOf="@id/imageCompanyLogo"
+                app:layout_constraintBottom_toBottomOf="@id/imageCompanyLogo"
+                tools:text="Pegasus" />
+
+            <TextView
+                android:id="@+id/textFlightDirection"
+                android:text="@{flight.directionText}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="@id/buttonNavigate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textFlightHour"
+                app:layout_constraintBottom_toBottomOf="@id/buttonNavigate"
+                tools:text="SAW > AMS" />
+
+            <TextView
+                android:id="@+id/textFlightHour"
+                app:departure="@{flight.departureTime.time}"
+                app:arrival="@{flight.arrivalTime.time}"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/buttonNavigate"
+                app:layout_constraintStart_toEndOf="@id/textFlightDirection"
+                app:layout_constraintEnd_toStartOf="@id/textFlightPrice"
+                app:layout_constraintBottom_toBottomOf="@id/buttonNavigate"
+                tools:text="08:40 -> 11.30" />
+
+            <TextView
+                android:id="@+id/textFlightPrice"
+                android:text="@{Double.toString(flight.price.total)}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="@dimen/space_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/buttonNavigate"
+                app:layout_constraintStart_toEndOf="@id/textFlightHour"
+                app:layout_constraintEnd_toStartOf="@id/buttonNavigate"
+                app:layout_constraintBottom_toBottomOf="@id/buttonNavigate"
+                tools:text="1449,99 TL" />
+
+            <ImageButton
+                android:id="@+id/buttonNavigate"
+                android:src="@drawable/ic_caret_forward"
+                app:tint="@color/primary"
+                android:background="@color/transparent"
+                android:layout_marginTop="@dimen/space_8"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintTop_toBottomOf="@id/imageCompanyLogo"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/separator"
+                android:background="@color/gray200"
+                android:layout_width="0dp"
+                android:layout_height="0.3dp"
+                android:layout_marginTop="@dimen/space_16"
+                app:layout_constraintTop_toBottomOf="@id/buttonNavigate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                android:id="@+id/buttonExpand"
+                android:src="@drawable/ic_dropdown"
+                android:background="@drawable/button_background"
+                android:layout_width="36dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="@dimen/space_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator" />
+
+            <TextView
+                android:id="@+id/textFlightType"
+                android:text="@{flight.direct ? @string/flight_direct : @string/flight_connecting}"
+                android:textColor="@color/primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_4"
+                app:layout_constraintTop_toTopOf="@id/buttonExpand"
+                app:layout_constraintStart_toEndOf="@id/buttonExpand"
+                app:layout_constraintBottom_toBottomOf="@id/buttonExpand"
+                tools:text="Direkt Ucus" />
+
+            <ImageView
+                android:id="@+id/separatorText"
+                android:src="@drawable/ic_circle"
+                app:tint="@color/gray100"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="@dimen/space_8"
+                app:layout_constraintTop_toTopOf="@id/textFlightType"
+                app:layout_constraintStart_toEndOf="@id/textFlightType"
+                app:layout_constraintBottom_toBottomOf="@id/textFlightType" />
+
+            <TextView
+                android:id="@+id/textBaggageCapacity"
+                baggageInfoList="@{flight.baggageInfo}"
+                android:drawablePadding="@dimen/space_2"
+                app:drawableTint="@color/gray200"
+                android:gravity="start|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_8"
+                app:layout_constraintTop_toTopOf="@id/textFlightType"
+                app:layout_constraintStart_toEndOf="@id/separatorText"
+                app:layout_constraintBottom_toBottomOf="@id/textFlightType"
+                tools:text="20 kg/kisi" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

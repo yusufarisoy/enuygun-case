@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Enuygun Case</string>
+    <string name="flight_direct">Direkt Uçuş</string>
+    <string name="flight_connecting">Aktarmalı Uçuş</string>
+    <string name="button_sort">Sırala</string>
+    <string name="button_filter">Filtrele</string>
+    <string name="text_baggage">%1$d %2$s/kişi</string>
+    <string name="text_carry_on">El bagajı</string>
+    <string name="text_one_way">Tek Yön |</string>
+    <string name="tab_before">Önceki gün %1$.2f %2$s</string>
+    <string name="tab_after">Sonraki gün %1$.2f %2$s</string>
+</resources>
